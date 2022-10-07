@@ -6,6 +6,7 @@ class WhatsAppController{
 
             this.elementsPrototype();
             this.loadElements();
+            this.initEvents();
         }
 
         //percorre os elementos html e retorna o padrao camelcase para facilitar
@@ -67,6 +68,40 @@ class WhatsAppController{
             Element.prototype.hasClass = function(name){
                 return this.classList.contains(name);
             }
+
+            
         }
-    
+
+        initEvents(){
+
+            this.el.myPhoto.on('click', e=>{
+                this.closeAllLeftPanel();
+                this.el.panelEditProfile.show();
+                setTimeout(()=>{
+                    this.el.panelEditProfile.addClass('open');
+                },300);
+                
+            });
+
+            this.el.btnNewContact.on('click', e=>{
+                this.closeAllLeftPanel();
+                this.el.panelAddCotact.show();
+                setTimeout(()=>{
+                    this.el.panelAddCotact.addClass('open');
+                },300);
+            });
+
+            this.el.btnClosePanelEditProfile.on('click', e=>{
+                this.el.paneEditProfile.removeClass('open');
+            });
+            
+            this.el.btnClosePanelAddContact.on('click', e=>{
+                this.el.panelAddCotact.removeClass('open');
+            });
+        }
+        
+        closeAllLeftPanel(){
+            this.el.panelAddCotact.hide();
+            this.el.paneEditProfile.hide();
+        }
 }
