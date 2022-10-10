@@ -2,7 +2,6 @@ class WhatsAppController{
 
         constructor(){
 
-            console.log('WhatsappController ok');
 
             this.elementsPrototype();
             this.loadElements();
@@ -18,9 +17,10 @@ class WhatsAppController{
                 this.el[FormData.getCamelcase(element.id)] = element;
             });
         }
-
+        //add novos metodos nas classes nativas Element e HTMLFormElement.
         elementsPrototype(){
 
+            //o return this permite que as funçoes possam ser encadeadas
             Element.prototype.hide = function(){
                 this.style.display = 'none';
                 return this;
@@ -69,14 +69,31 @@ class WhatsAppController{
                 return this.classList.contains(name);
             }
 
-            
-        }
+            //obtem os dados do input e retorna em formdata
+            HTMLFormElement.prototype.getForm = function(){
+                return new FormData(this);
+            }
 
+            //transforma os dados do formulario em um json
+            HTMLFormElement.prototype.toJSON = function(){
+                let JSON = {};
+
+                this.getForm().forEach((value, key)=>{
+                    json[key]=value;
+                });
+
+                return JSON;
+            }
+     
+        }
+        //inicia os eventos
         initEvents(){
+            //---painel superior esquerdo---
 
             this.el.myPhoto.on('click', e=>{
                 this.closeAllLeftPanel();
                 this.el.panelEditProfile.show();
+                //para dar tempo do elemento ser renderizado antes da animação
                 setTimeout(()=>{
                     this.el.panelEditProfile.addClass('open');
                 },300);
@@ -102,6 +119,24 @@ class WhatsAppController{
             this.el.photoContainerEditProfile.on('click', e=>{
                 this.el.inputProfilePhoto.click();
             });
+
+            this.el.inputNamePanelEditProfile.on('keypress', e=>{
+                if(e.key === 'Enter') {
+                    e.preventDefaul();
+                    this.el.btnSavePanelEditProfile.click();
+                }
+            });
+
+            this.el.btnSavePanelEditProfile.on('click', e=>{
+                console.log(this.el.inputNamePanelEditProfile.innerHTML);
+            });
+
+            this.el.formPanelAddContact.on('submit', e=>{
+                e.preventDefaul();
+                let formdata = new FormData(this.el.formPanelAddContact);
+            })
+
+
         }
         
         closeAllLeftPanel(){
