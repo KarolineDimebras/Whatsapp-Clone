@@ -134,11 +134,62 @@ class WhatsAppController{
             this.el.formPanelAddContact.on('submit', e=>{
                 e.preventDefaul();
                 let formdata = new FormData(this.el.formPanelAddContact);
+            });
+
+            //dentro da lista busca a classe
+            //clica no contato de mostra a lista de msg
+            this.el.contactMessagesList.querySelectorAll('.contact-item').forEach(item=>{
+                item.on('click', e=>{
+                    //oculta a imagem de fundo quando abre a cvs
+                    this.el.home.hide();
+                    this.el.main.css({
+                        display:'flex'
+                    });
+                });
+            });
+
+            //---botao anexar e suas opções---
+            this.el.btnAttach.on('click', e=>{
+
+                e.stopPropagation();
+                this.el.menuAttach.addClass('open');
+                document.addEventListener('click', this.closeMenuAttach.bind(this));
+            });
+
+            this.el.btnAttachPhoto.on('click', e=>{
+                this.el.inputPhoto.click();
+            });
+            
+            //permite selecionar e organizar varias fotos 
+            this.el.inputPhoto.on('change', e=>{
+                [...this.el.inputPhoto.files].forEach(file=>{
+                    console.log(file);
+                })
             })
+
+            this.el.btnAttachCamera.on('click', e=>{
+                console.log('camera');
+            });
+
+            this.el.btnAttachDocument.on('click', e=>{
+                console.log('document');
+            });
+
+            this.el.btnAttachContact.on('click', e=>{
+                console.log('contact');
+            });
+
+
 
 
         }
-        
+
+        //fecha o menu anexar
+        closeMenuAttach(e){
+            document.removeEventListener('click', this.closeMenuAttach);
+            this.el.menuAttach.removeClass('open');
+        }
+
         closeAllLeftPanel(){
             this.el.panelAddCotact.hide();
             this.el.paneEditProfile.hide();
