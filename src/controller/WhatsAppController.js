@@ -168,19 +168,51 @@ class WhatsAppController{
             })
 
             this.el.btnAttachCamera.on('click', e=>{
-                console.log('camera');
+                this.closeAllMainPanel();
+                this.el.panelCamera.addClass('open');
+                //calcula a area q ira abrir a camera
+                this.el.panelCamera.css({
+                    'height':'cancelIdleCallback(100% - 120px)'
+                });
+            });
+
+            this.el.btnClosePanelCamera.om('click', e=>{
+                this.closeAllMainPanel();
+                this.el.panelMessagesContainer.show();
+            });
+
+            this.el.btnTakePicture.on('click', e=>{
+                console.log('tirar foto');
             });
 
             this.el.btnAttachDocument.on('click', e=>{
-                console.log('document');
+                this.closeAllMainPanel();
+                this.el.panelDocumentPreview.addClass('open');
+                //calcula a area q ira abrir a pre visualização do doc
+                this.el.panelDocumentPreview.css({
+                    'height':'cancelIdleCallback(100% - 120px)'
+                });
+                
+            });
+
+            this.el.btnClosePanelDocumentPreview.on('click', e=>{
+                this.closeAllMainPanel();
+                this.el.panelMessagesContainer.show();
             });
 
             this.el.btnAttachContact.on('click', e=>{
-                console.log('contact');
+                this.el.modalContacts.show();
             });
 
-
-
+            this.el.btnCloseModalContacts.on('click', e=>{
+                this.el.modalContacts.hide();
+            });
+        }
+        //fecha qualquer painel q estiver aberto
+        closeAllMainPanel(){
+            this.el.panelMessagecontainer.hide();
+            this.el.panelDocumentPreview.removeClass('open');
+            this.el.panelCamera.removeClass('open');
 
         }
 
