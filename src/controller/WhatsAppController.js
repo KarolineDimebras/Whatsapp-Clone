@@ -207,6 +207,38 @@ class WhatsAppController{
             this.el.btnCloseModalContacts.on('click', e=>{
                 this.el.modalContacts.hide();
             });
+
+            //abre o gravador de audio
+            this.el.btnSendMicrophone.on('click', e=>{
+                this.closeRecordMicrophone();
+                this.startRecordMicrophoneTime();
+            });
+
+            //cancela o audio
+            this.el.btnCancelMicrophone.on('click', e=>{
+                this.closeRecordMicrophone();
+            });
+
+            //concluir o audio
+            this.el.btnFinishMicrophone.on('click', e=>{
+                this.closeRecordMicrophone();
+            });
+        }
+
+        //inicia o cronometro do gravador de audio
+        startRecordMicrophoneTime(){
+            let start = Date.now();
+            this._recordMicrophoneInterval = setInterval(()=>{
+                this.el.startRecordMicrophoneTime.innerHTML = Format.toTime(Date.now() - start);
+            }, 100);
+        }
+
+
+        //fecha a gravação de audio
+        closeRecordMicrophone(){
+            this.el.recordMicrophone.show();
+            this.el.btnSendmicrophone.hide();
+            clearInterval(this._recordMicrophoneInterval);
         }
         //fecha qualquer painel q estiver aberto
         closeAllMainPanel(){
