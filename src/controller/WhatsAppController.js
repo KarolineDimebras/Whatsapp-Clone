@@ -14,7 +14,7 @@ class WhatsAppController{
 
             this.el = {};
             document.querySelector(['id']).forEach(element=>{
-                this.el[FormData.getCamelcase(element.id)] = element;
+                this.el[Format.getCamelCase(element.id)] = element;
             });
         }
         //add novos metodos nas classes nativas Element e HTMLFormElement.
