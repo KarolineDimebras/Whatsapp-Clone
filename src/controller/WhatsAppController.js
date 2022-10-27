@@ -223,6 +223,46 @@ class WhatsAppController{
             this.el.btnFinishMicrophone.on('click', e=>{
                 this.closeRecordMicrophone();
             });
+
+            //verifica se a pessoa clicou Enter para enviar a msg
+            this.el.inputText.on('keypress', e=>{
+                
+                if(e.key === 'Enter' && !e.ctrlKey){
+                    e.preventDefaul();
+                    this.el.btnSend.click();
+                }
+            });
+
+            //oculta ou habilita o texto e icones do campo de digitar mensagem
+            this.el.inputText.on('keyup', e=>{
+
+                if(this.el.inputText.innerHTML.length){
+                    this.el.inputPlaceholder.hide();
+                    this.el.btnSendMicrophone.hide();
+                    this.el.btnSend.show();
+                }else{
+                    this.el.inputPlaceholder.show();
+                    this.el.btnSendMicrophone.show();
+                    this.el.btnSend.hide();
+                }
+            });
+
+            //enviar msg
+            this.el.btnSend.on('click', e=>{
+
+            });
+
+            //abrir selecao de emoji
+            this.el.btnEmojis.on('click', e=>{
+                this.el.panelEmojis.toogleClass('open');
+            });
+
+            //seleciona o emoji no painel
+            this.el.panelEmojis.querySelectorAll('.emojik').forEach(emoji=>{
+                emoji.on('click', e=>{
+                    
+                })
+            });
         }
 
         //inicia o cronometro do gravador de audio
