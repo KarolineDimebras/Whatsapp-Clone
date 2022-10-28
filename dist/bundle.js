@@ -1,6 +1,88 @@
-import {Format} from './../util/Format';
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "dist";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-export class WhatsAppController{
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controller_WhatsAppController__ = __webpack_require__(1);
+
+
+window.app = new __WEBPACK_IMPORTED_MODULE_0__controller_WhatsAppController__["a" /* WhatsAppController */]();
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_Format__ = __webpack_require__(2);
+
+
+class WhatsAppController{
 
         constructor(){
 
@@ -16,7 +98,7 @@ export class WhatsAppController{
 
             this.el = {};
             document.querySelector(['id']).forEach(element=>{
-                this.el[Format.getCamelCase(element.id)] = element;
+                this.el[__WEBPACK_IMPORTED_MODULE_0__util_Format__["a" /* Format */].getCamelCase(element.id)] = element;
             });
         }
         //add novos metodos nas classes nativas Element e HTMLFormElement.
@@ -297,7 +379,7 @@ export class WhatsAppController{
         startRecordMicrophoneTime(){
             let start = Date.now();
             this._recordMicrophoneInterval = setInterval(()=>{
-                this.el.startRecordMicrophoneTime.innerHTML = Format.toTime(Date.now() - start);
+                this.el.startRecordMicrophoneTime.innerHTML = __WEBPACK_IMPORTED_MODULE_0__util_Format__["a" /* Format */].toTime(Date.now() - start);
             }, 100);
         }
 
@@ -327,3 +409,46 @@ export class WhatsAppController{
             this.el.paneEditProfile.hide();
         }
 }
+/* harmony export (immutable) */ __webpack_exports__["a"] = WhatsAppController;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Format{
+    
+    /**
+         * @param {String} text Texto no padrão de id css. Ex.: #meu-id
+         * @return {String} Texto formatado em camelCase.
+         */
+    static getCamelCase(text) {
+        let div = document.createElement('div');
+
+        div.innerHTML = `<div data-${text}="id"></div>`;
+        
+        return Object.keys(div.firstChild.dataset)[0];
+    }
+
+    /**
+     * @param {Date} duration 
+     * @return {String} Hora formatada para 0:00:00 (se ouver horas) ou 0:00.
+     */
+    static toTime(duration) {
+        let seconds = parseInt((duration / 1000) % 60);
+        let minutes = parseInt((duration / (1000 * 60)) % 60);
+        let hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+        if (hours > 0) {
+            return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else {
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Format;
+
+
+/***/ })
+/******/ ]);
