@@ -1,4 +1,4 @@
-import {Format} from './../util/Format';
+import {Format} from '../utils/Format';
 
 export class WhatsAppController{
 
@@ -78,13 +78,13 @@ export class WhatsAppController{
 
             //transforma os dados do formulario em um json
             HTMLFormElement.prototype.toJSON = function(){
-                let JSON = {};
+                let json = {};
 
                 this.getForm().forEach((value, key)=>{
                     json[key]=value;
                 });
 
-                return JSON;
+                return json;
             }
      
         }
