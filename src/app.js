@@ -1,3 +1,3 @@
-import {WhatsAppController} from './controllers/WhatsAppController';
+import { WhatsAppController } from './controller/WhatsAppController.js';
 
 window.app = new WhatsAppController();

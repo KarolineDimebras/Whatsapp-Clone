@@ -1,25 +1,26 @@
 {
-  "name": "whatsapp-clone",
+  "name": "curso-javascript-projeto-whatsapp-clone",
   "version": "1.0.0",
-  "description": "",
+  "description": "[![Hcode Treinamentos](https://www.hcode.com.br/res/img/hcode-200x100.png)](https://www.hcode.com.br)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "dev": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KarolineDimebras/Whatsapp-Clone.git"
+    "url": " "
   },
-  "author": "",
+  "author": "Hcode Treinamentos",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KarolineDimebras/Whatsapp-Clone/issues"
+  "devDependencies": {
+    "webpack": "^5.74.0",
+    "webpack-dev-server": "^4.11.1",
+    "worker-loader": "^3.0.8"
   },
-  "homepage": "https://github.com/KarolineDimebras/Whatsapp-Clone#readme",
   "dependencies": {
-    "webpack": "^3.1.0",
-    "webpack-dev-server": "^2.5.1"
+    "firebase": "^9.13.1"
+  
   }
 }
