@@ -1,4 +1,5 @@
-import * as firebase from 'firebase'
+const firebase = require('firebase');
+require('firebase/firestore');
 
 export class Firebase {
 
