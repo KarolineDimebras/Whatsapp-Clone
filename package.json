@@ -10,17 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": " "
+    "url": "git+https://github.com/hcodebr/curso-javascript-projeto-whatsapp-clone.git"
   },
-  "author": "Hcode Treinamentos",
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hcodebr/curso-javascript-projeto-whatsapp-clone/issues"
+  },
+  "homepage": "https://github.com/hcodebr/curso-javascript-projeto-whatsapp-clone#readme",
   "devDependencies": {
     "webpack": "^5.74.0",
     "webpack-dev-server": "^4.11.1",
     "worker-loader": "^3.0.8"
-  },
-  "dependencies": {
-    "firebase": "^9.13.1"
-  
   }
 }

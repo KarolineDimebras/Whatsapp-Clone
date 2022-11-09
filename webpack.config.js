@@ -6,8 +6,8 @@ module.exports = {
         'pdf.worker': 'pdfjs-dist/build/pdf.worker.entry'
     },
     output: {
-        path: path.join(__dirname, 'dist'),
-        publicPath: 'dist',
-        filename: '[name].bundle.js'
+        path: path.join(__dirname, '/dist'),
+        publicPath: '/dist',
+        filename: '/[name].bundle.js'
     }
 };
