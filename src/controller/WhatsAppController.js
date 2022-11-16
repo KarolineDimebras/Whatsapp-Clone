@@ -241,17 +241,23 @@ class WhatsAppController{
                 this.startRecordMicrophoneTime();
 
                 this._microphoneController = new MicrophoneController();
+
+                this._microphoneController.on('ready', toca=>{
+                    console.log('recebi o play');
+
+                    this._microphoneController.startRecorder();
+                });
             });
     
             //cancela o audio
             this.el.btnCancelMicrophone.on('click', e=>{
-                this._microphoneController.stop();
+                this._microphoneController.stopRecorder();
                 this.closeRecordMicrophone();
             });
     
             //concluir o audio
             this.el.btnFinishMicrophone.on('click', e=>{
-                this._microphoneController.stop();
+                this._microphoneController.stopRecorder();
                 this.closeRecordMicrophone();
             });
 
