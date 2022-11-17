@@ -4,9 +4,21 @@ class WhatsAppController{
     constructor(){
         console.log('WhatsAppController ok');
 
+        this.initAuth();
         this.elementsPrototype();
         this.loadElements();
         this.initEvents();
+        
+    }
+
+    initAuth(){
+        this._firebase.initAuth()
+        .then(response=>{
+            console.log('response', response);
+        })
+        .catch(err=>{
+            console.error(err);
+        })
     }
 
     loadElements(){
@@ -238,7 +250,7 @@ class WhatsAppController{
             this.el.btnSendMicrophone.on('click', e=>{
                 this.el.recordMicrophone.show();
                 this.el.btnSendMicrophone.hide();
-                this.startRecordMicrophoneTime();
+
 
                 this._microphoneController = new MicrophoneController();
 
@@ -247,6 +259,11 @@ class WhatsAppController{
 
                     this._microphoneController.startRecorder();
                 });
+
+                this._microphoneController.on('recordtimer', timer=>{
+                    this.el.recordMicrophoneTimer.innerHTML = Format.toTime(timer);
+                });
+
             });
     
             //cancela o audio
@@ -333,20 +350,11 @@ class WhatsAppController{
     
     }
 
-    //inicia o cronometro do gravador de audio
-    startRecordMicrophoneTime(){
-    let start = Date.now();
-        this._recordMicrophoneInterval = setInterval(()=>{
-            this.el.recordMicrophoneTimer.innerHTML = Format.toTime(Date.now() - start);
-        }, 100);
-    }
-
-
     //fecha a gravação de audio
     closeRecordMicrophone(){
         this.el.recordMicrophone.hide();
         this.el.btnSendMicrophone.show();
-        clearInterval(this._recordMicrophoneInterval);
+        
     }
 
      //fecha qualquer painel q estiver aberto
